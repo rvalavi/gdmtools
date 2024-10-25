@@ -1,11 +1,26 @@
 Package: gdmtools
 Type: Package
-Title: What the Package Does (Title Case)
+Title: GDM tools: post-processing GDM output rasters
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Roozbeh Valavi
+Maintainer: <valavi.r@gmail.com>
+Description: Providing functions and utilities to generate the advanced spatial 
+    analysis products from GDM raster outputs (based on Mokany et al. 2022).
+License: (TO BE DECIDED)
 Encoding: UTF-8
 LazyData: true
+Depends:
+  R (>= 4.1.0)
+Imports:
+  Rcpp (>= 1.0.2)
+Suggests:
+  terra (>= 1.7.71),
+  methods,
+  knitr,
+  rmarkdown,
+  tinytest
+RoxygenNote: 7.3.2
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+LinkingTo: 
+  Rcpp
