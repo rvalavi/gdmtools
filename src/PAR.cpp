@@ -3,7 +3,6 @@
 #include <Rcpp.h>
 #include <cmath>
 #include <vector>
-#include <cstdint>
 #include "Lightweight_matrix.h"
 
 #ifdef _OPENMP
@@ -32,7 +31,8 @@ Rcpp::NumericVector PAR(
         const Rcpp::NumericMatrix &rast_vals,
         const Rcpp::NumericMatrix &ref_vals,
         const std::vector<int> &samples,
-        const double intercept)
+        const double intercept,
+        int num_threads = -1)
 {
     Lightweight_matrix<double> rast(rast_vals);
     Lightweight_matrix<double> refs(ref_vals);
