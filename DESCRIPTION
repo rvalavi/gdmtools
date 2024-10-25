@@ -2,7 +2,7 @@ Package: gdmtools
 Type: Package
 Title: GDM tools: post-processing GDM output rasters
 Version: 0.1.0
-Author: Roozbeh Valavi
+Author: Roozbeh Valavi, etc...
 Maintainer: <valavi.r@gmail.com>
 Description: Providing functions and utilities to generate the advanced spatial 
     analysis products from GDM raster outputs (based on Mokany et al. 2022).
