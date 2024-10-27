@@ -6,7 +6,7 @@
 #' @param x
 #' @param pa
 #' @param n
-#' @param intercept
+#' @param mod
 #' @param ncores
 #' @param ...
 #'
@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-par_index <- function(x, pa, intercept, n = NULL, ncores = -1, ...) {
+par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
 
     if (.is_rast(x)) {
         x <- .check_rast(x)
@@ -52,7 +52,7 @@ par_index <- function(x, pa, intercept, n = NULL, ncores = -1, ...) {
         },
         ref_vals = as.matrix(pa_vals),
         samples = samps,
-        intercept = ifelse(methods::is(intercept, "gdm"), intercept$intercept, intercept),
+        intercept = ifelse(methods::is(mod, "gdm"), mod$intercept, mod),
         nthreads = ncores,
         ...
     )
