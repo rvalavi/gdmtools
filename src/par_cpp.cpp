@@ -27,12 +27,12 @@ inline auto dist(
 }
 
 // [[Rcpp::export]]
-Rcpp::NumericVector PAR(
+Rcpp::NumericVector par_cpp(
         const Rcpp::NumericMatrix &rast_vals,
         const Rcpp::NumericMatrix &ref_vals,
         const std::vector<int> &samples,
         const double intercept,
-        int num_threads = -1)
+        int nthreads = -1)
 {
     Lightweight_matrix<double> rast(rast_vals);
     Lightweight_matrix<double> refs(ref_vals);
@@ -46,8 +46,8 @@ Rcpp::NumericVector PAR(
 
     // set the number of threads
     #ifdef _OPENMP
-        if (num_threads < 1) num_threads = omp_get_max_threads();
-        omp_set_num_threads(num_threads);
+        if (nthreads < 1) nthreads = omp_get_max_threads();
+        omp_set_num_threads(nthreads);
     #endif
 
     #pragma omp parallel for
