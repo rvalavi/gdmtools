@@ -48,7 +48,7 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
     }
 
     out <- terra::predict(
-        object = r,
+        object = x,
         model = list(),
         fun = function(obj, dat, ...) {
             par_cpp(
