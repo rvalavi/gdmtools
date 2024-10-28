@@ -18,6 +18,8 @@
 #' @export
 #'
 #' @examples
+#' library(gdmtools)
+#'
 par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
 
     if (.is_rast(x)) {

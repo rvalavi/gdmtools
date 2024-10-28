@@ -30,3 +30,7 @@ SpatRaster
 Using GDM predictions for assessing how well the protected areas in a
 region represent the biological diversity.
 }
+\examples{
+library(gdmtools)
+
+}
