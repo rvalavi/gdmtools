@@ -18,7 +18,7 @@ inline auto dist(
         int j)
 {
     auto out = 0.0;
-    for (int k; k < x.ncol(); k ++)
+    for (int k = 0; k < x.ncol(); k ++)
     {
         out += std::abs(x(i, k) - y(j, k));
     }
@@ -55,18 +55,18 @@ Rcpp::NumericVector par_cpp(
     {
         // loop through the reference samples
         double pa_dist = 0.0;
-        for (int j; j < nref; j++)
+        for (int j = 0; j < nref; j++)
         {
             auto dist_1 = dist(rast, refs, i, j);
-            pa_dist += std::exp(-1 * (intercept + dist_1));
+            pa_dist += std::exp(-1.0 * (intercept + dist_1));
         }
 
         // loop through the reference cell for whole region
         double reg_dist = 0.0;
-        for (int j; j < nsam; j++)
+        for (int j = 0; j < nsam; j++)
         {
             auto dist_2 = dist(rast, refs, i, samples[j]);
-            reg_dist += std::exp(-1 * (intercept + dist_2));
+            reg_dist += std::exp(-1.0 * (intercept + dist_2));
         }
 
         output[i] = (pa_dist / static_cast<double>(nref)) / (reg_dist / static_cast<double>(nsam));

@@ -3,14 +3,18 @@
 #' Using GDM predictions for assessing how well the protected areas in a
 #' region represent the biological diversity.
 #'
-#' @param x
-#' @param pa
-#' @param n
-#' @param mod
-#' @param ncores
-#' @param ...
+#' @param x A SpatRaster of GDM transformed layers. It accepts any raster type convertible to terra objects
+#' or a path to files on disk.
+#' @param pa protected areas as polygons, masked GDM transformed rasters, or a data.frame of extracted values
+#'  from protected areas.
+#' @param n number of samples to take from protected areas to compare with regions. NULL or 0 means all
+#'  cells.
+#' @param mod either a gdm model or the intercept of fitted model.
+#' @param ncores number of cores to process. Default is all available cores.
+#' @param ... Additional arguments for writing raster outputs e.g. \code{filename},
+#' \code{overwrite}, and \code{wopt} from terra \code{\link[terra]{predict}}.
 #'
-#' @return
+#' @return SpatRaster
 #' @export
 #'
 #' @examples
@@ -35,10 +39,12 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
 
     n_ref <- nrow(pa_vals)
     if (is.null(n) || n == 0) {
-        samps <- seq_len(n_ref)
+        samps <- seq_len(n_ref) - 1 # to match C++ indices
     } else {
-        n <- ifelse(n > n_ref, n_ref, n)
-        samps <- seq_len(n_ref)
+        samps <- seq_len(n_ref) - 1 # to match C++ indices
+        if (n < n_ref) {
+            samps <- sample(samps, n)
+        }
     }
 
     out <- terra::predict(
