@@ -29,12 +29,12 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
     }
 
     if (.is_vect(pa)) {
-        pa_vals <- terra::extract(x, pa, ID = FALSE)
+        pa_vals <- as.matrix(terra::extract(x, pa, ID = FALSE))
     } else if (.is_rast(pa)) {
         pa <- .check_rast(pa)
-        pa_vals <- terra::as.data.frame(pa)
+        pa_vals <- as.matrix(terra::as.data.frame(pa))
     } else if (methods::is(pa, "data.frame")) {
-        pa_vals <- pa[, names(x)]
+        pa_vals <- as.matrix(pa[, names(x)])
     } else {
         stop("pa must be a vector, raster or a data frame of GDM transform values for protected areas.")
     }
@@ -49,16 +49,40 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
         }
     }
 
+    par_fun <- function(model, newdata, ...) {
+        # check for NAs
+        has_na <- anyNA(newdata)
+        nr <- nrow(newdata)
+        if (has_na) {
+            idx <- which(stats::complete.cases(newdata))
+            out <- rep(NaN, nr)
+            # if all NA, return NaN vector
+            if (!length(idx)) return(out)
+            # subset the complete data
+            dat <- as.matrix(newdata[idx, ])
+        } else {
+            dat <- as.matrix(newdata)
+        }
+
+        pcount <- par_cpp(
+            rast_vals = dat,
+            ...
+        )
+
+        # sort out possible NAs
+        if (has_na) {
+            out[idx] <- pcount
+            return(out)
+        } else {
+            return(pcount)
+        }
+    }
+
     out <- terra::predict(
         object = x,
         model = list(),
-        fun = function(obj, dat, ...) {
-            par_cpp(
-                rast_vals = as.matrix(dat),
-                ...
-            )
-        },
-        ref_vals = as.matrix(pa_vals),
+        fun = par_fun,
+        ref_vals = pa_vals,
         samples = samps,
         intercept = ifelse(methods::is(mod, "gdm"), mod$intercept, mod),
         nthreads = ncores,

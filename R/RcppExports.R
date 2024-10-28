@@ -2,6 +2,6 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 par_cpp <- function(rast_vals, ref_vals, samples, intercept, nthreads = -1L) {
-    .Call('_gdmtools_par_cpp', PACKAGE = 'gdmtools', rast_vals, ref_vals, samples, intercept, nthreads)
+    .Call(`_gdmtools_par_cpp`, rast_vals, ref_vals, samples, intercept, nthreads)
 }
 

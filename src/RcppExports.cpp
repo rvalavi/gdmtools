@@ -11,7 +11,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // par_cpp
-Rcpp::NumericVector par_cpp(const Rcpp::NumericMatrix& rast_vals, const Rcpp::NumericMatrix& ref_vals, const std::vector<int>& samples, const double intercept, int nthreads);
+std::vector<double> par_cpp(const Rcpp::NumericMatrix& rast_vals, const Rcpp::NumericMatrix& ref_vals, const std::vector<int>& samples, const double intercept, int nthreads);
 RcppExport SEXP _gdmtools_par_cpp(SEXP rast_valsSEXP, SEXP ref_valsSEXP, SEXP samplesSEXP, SEXP interceptSEXP, SEXP nthreadsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
