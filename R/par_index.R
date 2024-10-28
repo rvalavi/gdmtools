@@ -42,15 +42,12 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
     # filter NAs
     pa_vals <- pa_vals[stats::complete.cases(pa_vals), ]
 
-    n_ref <- nrow(pa_vals)
     if (is.null(n) || n == 0) {
-        samps <- seq_len(n_ref) - 1 # to match C++ indices
-    } else {
-        samps <- seq_len(n_ref) - 1 # to match C++ indices
-        if (n < n_ref) {
-            samps <- sample(samps, n)
-        }
+        nc <- as.numeric(terra::global(x[[1]], fun = "notNA"))
+        n <- nc / 2
     }
+    rand_cells <- terra::spatSample(x, size = n, method = "random")
+    rand_cells <- as.matrix(rand_cells[stats::complete.cases(rand_cells), ])
 
     par_fun <- function(model, newdata, ...) {
         # check for NAs
@@ -86,7 +83,7 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
         model = list(),
         fun = par_fun,
         ref_vals = pa_vals,
-        samples = samps,
+        samp_vals = rand_cells,
         intercept = ifelse(methods::is(mod, "gdm"), mod$intercept, mod),
         nthreads = ncores,
         ...

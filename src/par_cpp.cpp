@@ -29,19 +29,17 @@ inline double dist(
 Rcpp::NumericVector par_cpp(
         const Rcpp::NumericMatrix &rast_vals,
         const Rcpp::NumericMatrix &ref_vals,
-        const Rcpp::IntegerVector &samples,
+        const Rcpp::NumericMatrix &samp_vals,
         const double intercept,
         int nthreads = -1)
 {
     Lightweight_matrix<double> rast(rast_vals);
     Lightweight_matrix<double> refs(ref_vals);
+    Lightweight_matrix<double> samples(samp_vals);
 
     int nr = rast.nrow();
     int nref = refs.nrow();
-
-    // convert samples to std vector
-    std::vector<int> S = Rcpp::as<std::vector<int> >(samples);
-    int nsam = S.size();
+    int nsam = samples.nrow();
 
     // output vector
     std::vector<double> output(nr);
@@ -67,7 +65,7 @@ Rcpp::NumericVector par_cpp(
         double reg_dist = 0.0;
         for (int j = 0; j < nsam; j++)
         {
-            auto dist_2 = dist(rast, refs, i, S[j]);
+            auto dist_2 = dist(rast, samples, i, j);
             reg_dist += static_cast<double>(std::exp(-1.0 * (intercept + dist_2)));
         }
 
