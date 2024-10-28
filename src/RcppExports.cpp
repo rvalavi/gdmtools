@@ -11,14 +11,14 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // par_cpp
-std::vector<double> par_cpp(const Rcpp::NumericMatrix& rast_vals, const Rcpp::NumericMatrix& ref_vals, const std::vector<int>& samples, const double intercept, int nthreads);
+Rcpp::NumericVector par_cpp(const Rcpp::NumericMatrix& rast_vals, const Rcpp::NumericMatrix& ref_vals, const Rcpp::IntegerVector& samples, const double intercept, int nthreads);
 RcppExport SEXP _gdmtools_par_cpp(SEXP rast_valsSEXP, SEXP ref_valsSEXP, SEXP samplesSEXP, SEXP interceptSEXP, SEXP nthreadsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type rast_vals(rast_valsSEXP);
     Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type ref_vals(ref_valsSEXP);
-    Rcpp::traits::input_parameter< const std::vector<int>& >::type samples(samplesSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::IntegerVector& >::type samples(samplesSEXP);
     Rcpp::traits::input_parameter< const double >::type intercept(interceptSEXP);
     Rcpp::traits::input_parameter< int >::type nthreads(nthreadsSEXP);
     rcpp_result_gen = Rcpp::wrap(par_cpp(rast_vals, ref_vals, samples, intercept, nthreads));

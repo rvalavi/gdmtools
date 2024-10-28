@@ -39,6 +39,9 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
         stop("pa must be a vector, raster or a data frame of GDM transform values for protected areas.")
     }
 
+    # filter NAs
+    pa_vals <- pa_vals[stats::complete.cases(pa_vals), ]
+
     n_ref <- nrow(pa_vals)
     if (is.null(n) || n == 0) {
         samps <- seq_len(n_ref) - 1 # to match C++ indices

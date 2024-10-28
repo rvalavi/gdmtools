@@ -26,10 +26,10 @@ inline double dist(
 }
 
 // [[Rcpp::export]]
-std::vector<double> par_cpp(
+Rcpp::NumericVector par_cpp(
         const Rcpp::NumericMatrix &rast_vals,
         const Rcpp::NumericMatrix &ref_vals,
-        const std::vector<int> &samples,
+        const Rcpp::IntegerVector &samples,
         const double intercept,
         int nthreads = -1)
 {
@@ -38,7 +38,10 @@ std::vector<double> par_cpp(
 
     int nr = rast.nrow();
     int nref = refs.nrow();
-    int nsam = samples.size();
+
+    // convert samples to std vector
+    std::vector<int> S = Rcpp::as<std::vector<int> >(samples);
+    int nsam = S.size();
 
     // output vector
     std::vector<double> output(nr);
@@ -64,13 +67,13 @@ std::vector<double> par_cpp(
         double reg_dist = 0.0;
         for (int j = 0; j < nsam; j++)
         {
-            auto dist_2 = dist(rast, refs, i, samples[j]);
+            auto dist_2 = dist(rast, refs, i, S[j]);
             reg_dist += static_cast<double>(std::exp(-1.0 * (intercept + dist_2)));
         }
 
         output[i] = (pa_dist / static_cast<double>(nref)) / (reg_dist / static_cast<double>(nsam));
     }
 
-    return output;
+    return Rcpp::wrap(output);
 }
 
