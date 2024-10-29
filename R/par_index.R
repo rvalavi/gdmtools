@@ -7,8 +7,8 @@
 #' or a path to files on disk.
 #' @param pa protected areas as polygons, masked GDM transformed rasters, or a data.frame of extracted values
 #'  from protected areas.
-#' @param n number of samples to take from protected areas to compare with regions. NULL or 0 means all
-#'  cells.
+#' @param n number of samples to take from the entire region to normalise the similarity values. if NULL or 0
+#' used, 20% of the number of non-na cells will be used as the sample number.
 #' @param mod either a gdm model or the intercept of fitted model.
 #' @param ncores number of cores to process. Default is all available cores.
 #' @param ... Additional arguments for writing raster outputs e.g. \code{filename},
@@ -44,7 +44,7 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
 
     if (is.null(n) || n == 0) {
         nc <- as.numeric(terra::global(x[[1]], fun = "notNA"))
-        n <- nc / 2
+        n <- ceiling(nc / 5)
     }
     rand_cells <- terra::spatSample(x, size = n, method = "random")
     rand_cells <- as.matrix(rand_cells[stats::complete.cases(rand_cells), ])

@@ -15,8 +15,8 @@ from protected areas.}
 
 \item{mod}{either a gdm model or the intercept of fitted model.}
 
-\item{n}{number of samples to take from protected areas to compare with regions. NULL or 0 means all
-cells.}
+\item{n}{number of samples to take from the entire region to normalise the similarity values. if NULL or 0
+used, 20% of the number of non-na cells will be used as the sample number.}
 
 \item{ncores}{number of cores to process. Default is all available cores.}
 

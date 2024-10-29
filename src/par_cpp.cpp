@@ -69,6 +69,7 @@ Rcpp::NumericVector par_cpp(
             reg_dist += static_cast<double>(std::exp(-1.0 * (intercept + dist_2)));
         }
 
+        #pragma omp critical
         output[i] = (pa_dist / static_cast<double>(nref)) / (reg_dist / static_cast<double>(nsam));
     }
 
