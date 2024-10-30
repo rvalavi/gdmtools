@@ -1,3 +1,29 @@
+# drop NA from file
+drop_na <- function(x, war = TRUE, msg = ".") {
+    n <- nrow(x)
+    ccs <- stats::complete.cases(x)
+    len <- sum(ccs)
+    if (war && len < n) {
+        message(n - len, " of records had NA and were removed", msg)
+    }
+
+    return(
+        x[ccs, ]
+    )
+}
+
+.is_mat <- function(x) {
+    z <- class(x)
+    return(
+        any(
+            z %in% c(
+                "data.frame", "matrix", "data.table", "tibble"
+            )
+        )
+    )
+}
+
+
 # is it a raster object
 .is_rast <- function(x){
     z <- class(x)

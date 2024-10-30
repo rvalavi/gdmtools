@@ -6,7 +6,7 @@ Author: Roozbeh Valavi, etc...
 Maintainer: <valavi.r@gmail.com>
 Description: Providing functions and utilities to generate the advanced spatial 
     analysis products from GDM raster outputs (based on Mokany et al. 2022).
-License: (TO BE DECIDED)
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Depends:
