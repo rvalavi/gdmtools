@@ -4,7 +4,7 @@ drop_na <- function(x, war = TRUE, msg = ".") {
     ccs <- stats::complete.cases(x)
     len <- sum(ccs)
     if (war && len < n) {
-        message(n - len, " of records had NA and were removed", msg)
+        message(n - len, " records with NA values were removed", msg)
     }
 
     return(

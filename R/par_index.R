@@ -54,7 +54,7 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
     };
 
     # filter NAs
-    pa_vals <- drop_na(pa_vals, msg = " from protected area samples.")
+    pa_vals <- drop_na(pa_vals, msg = " from the protected area samples.")
 
     rand_cells <- {
         if (.is_mat(n)) {
@@ -68,7 +68,7 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
             as.matrix(
                 drop_na(
                     terra::spatSample(x, size = n, method = "random"),
-                    msg = " from random samples."
+                    msg = " from the random samples."
                 )
             )
         }

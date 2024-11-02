@@ -2,6 +2,7 @@
 
 [![R build
 status](https://github.com/rvalavi/gdmtools/workflows/R-CMD-check/badge.svg)](https://github.com/rvalavi/gdmtools/actions)
+[![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 
 ### Tools for Spatial Biodiversity Analysis from GDM Rasters Outputs
 
