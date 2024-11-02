@@ -4,26 +4,13 @@
 #include <cmath>
 #include <vector>
 #include "Lightweight_matrix.h"
+#include "helper.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif
 
 using namespace Rcpp;
 
-inline double dist(
-        const Lightweight_matrix<double> &x,
-        const Lightweight_matrix<double> &y,
-        int i,
-        int j)
-{
-    double out = 0.0;
-    for (int k = 0; k < x.ncol(); k ++)
-    {
-        out += std::abs(x(i, k) - y(j, k));
-    }
-
-    return out;
-}
 
 // [[Rcpp::export]]
 Rcpp::NumericVector par_cpp(
@@ -58,7 +45,7 @@ Rcpp::NumericVector par_cpp(
         for (int j = 0; j < nref; j++)
         {
             auto dist_1 = dist(rast, refs, i, j);
-            pa_dist += static_cast<double>(std::exp(-1.0 * (intercept + dist_1)));
+            pa_dist += similarity(intercept, dist_1);
         }
 
         // loop through the reference cell for whole region
@@ -66,7 +53,7 @@ Rcpp::NumericVector par_cpp(
         for (int j = 0; j < nsam; j++)
         {
             auto dist_2 = dist(rast, samples, i, j);
-            reg_dist += static_cast<double>(std::exp(-1.0 * (intercept + dist_2)));
+            reg_dist += similarity(intercept, dist_2);
         }
 
         #pragma omp critical
