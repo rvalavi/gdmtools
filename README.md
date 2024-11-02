@@ -1,6 +1,17 @@
 # gdmtools
 
-Note: The `gdmtools` package is still under active development, so the user interface might completely change and the functions might not work!
+[![R build
+status](https://github.com/rvalavi/gdmtools/workflows/R-CMD-check/badge.svg)](https://github.com/rvalavi/gdmtools/actions)
+
+### Tools for Spatial Biodiversity Analysis from GDM Rasters Outputs
+
+The `gdmtools` R package is designed to enhance spatial biodiversity analysis by leveraging outputs from Generalized Dissimilarity Modelling (GDM). Built with high-performance code and parallel processing to efficiently handle large raster grids. The package aims to cover methods introduced in Mokany et al. (2022).
+
+Note: `gdmtools` is actively under development, so the user interface and function behavior may change.
+
+### Currently implemented methods:
+- Protected area representativeness - predicted similarity to protected areas
+
 
 
 ## Installation

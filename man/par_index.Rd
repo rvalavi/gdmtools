@@ -43,3 +43,8 @@ parallel processing and speed up computations.
 library(gdmtools)
 
 }
+\references{
+Mokany, K., Ware, C., Woolley, S. N. C., Ferrier, S., & Fitzpatrick, M. C. (2022).
+A working guide to harnessing generalized dissimilarity modelling for biodiversity analysis and
+conservation assessment. Global Ecology and Biogeography, 31(4), 802–821.
+}

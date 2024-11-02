@@ -1,11 +1,13 @@
 Package: gdmtools
 Type: Package
-Title: GDM tools: post-processing GDM output rasters
+Title: Tools for Spatial Biodiversity Analysis from GDM Rasters Outputs
 Version: 0.1.0
-Author: Roozbeh Valavi, etc...
+Date: 2024-11-02
+Author: Roozbeh Valavi, et al...
 Maintainer: <valavi.r@gmail.com>
 Description: Providing functions and utilities to generate the advanced spatial 
-    analysis products from GDM raster outputs (based on Mokany et al. 2022).
+    biodiversity analysis products from GDM raster outputs (based on Mokany et al.
+    2022).
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
