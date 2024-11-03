@@ -16,9 +16,7 @@ drop_na <- function(x, war = TRUE, msg = ".") {
     z <- class(x)
     return(
         any(
-            z %in% c(
-                "data.frame", "matrix", "data.table", "tibble"
-            )
+            z %in% c("data.frame", "matrix", "data.table", "tibble")
         )
     )
 }
@@ -30,10 +28,8 @@ drop_na <- function(x, war = TRUE, msg = ".") {
     return(
         any(
             z %in% c(
-                "SpatRaster",
-                "RasterStack", "RasterLayer", "RasterBrick",
-                "stars",
-                "character"
+                "SpatRaster", "RasterStack", "RasterLayer", "RasterBrick",
+                "stars", "character"
             )
         )
     )
@@ -44,9 +40,7 @@ drop_na <- function(x, war = TRUE, msg = ".") {
     z <- class(x)
     return(
         any(
-            z %in% c(
-                "SpatVector ", "sf"
-            )
+            z %in% c("SpatVector ", "sf")
         )
     )
 }

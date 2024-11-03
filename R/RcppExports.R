@@ -5,3 +5,7 @@ par_cpp <- function(rast_vals, ref_vals, samp_vals, intercept, nthreads = -1L) {
     .Call(`_gdmtools_par_cpp`, rast_vals, ref_vals, samp_vals, intercept, nthreads)
 }
 
+presist_cpp <- function(rast_vals, ref_vals, cond_vals, intercept, power = 0.25, nthreads = -1L) {
+    .Call(`_gdmtools_presist_cpp`, rast_vals, ref_vals, cond_vals, intercept, power, nthreads)
+}
+

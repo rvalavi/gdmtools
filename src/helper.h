@@ -26,5 +26,4 @@ inline double similarity(double x, double y)
     return sim;
 }
 
-
 #endif /* SIMILARITY_HELPER */

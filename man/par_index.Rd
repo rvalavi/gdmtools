@@ -16,7 +16,7 @@ extracted GDM transform grids from protected areas.}
 \item{mod}{Either a \pkg{gdm} model object or the intercept value from a fitted model.}
 
 \item{n}{A numeric value specifying the number of samples to take from the entire region
-to normalize similarity values. If set to \code{NULL} or 0, 20\% of the non-NA cells will be used
+to normalize similarity values. If set to \code{NULL} or 0, 10\% of the non-NA cells will be used
 as the sample size. Alternatively, a data.frame of extracted values from random cells within the
 region can be provided instead.}
 

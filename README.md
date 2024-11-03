@@ -12,6 +12,7 @@ The `gdmtools` R package is designed to enhance spatial biodiversity analysis by
 
 ### Currently implemented methods:
 - Protected area representativeness - predicted similarity to protected areas
+- Expected species persistence given changes in habitat condition
 
 
 

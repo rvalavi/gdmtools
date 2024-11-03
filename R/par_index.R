@@ -11,7 +11,7 @@
 #' @param pa Protected areas provided as polygons, masked GDM-transformed rasters, or a data.frame of values
 #' extracted GDM transform grids from protected areas.
 #' @param n A numeric value specifying the number of samples to take from the entire region
-#' to normalize similarity values. If set to \code{NULL} or 0, 20\% of the non-NA cells will be used
+#' to normalize similarity values. If set to \code{NULL} or 0, 10\% of the non-NA cells will be used
 #' as the sample size. Alternatively, a data.frame of extracted values from random cells within the
 #' region can be provided instead.
 #' @param mod Either a \pkg{gdm} model object or the intercept value from a fitted model.
@@ -61,9 +61,9 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
             as.matrix(n)
         } else {
             # take random sample from the region
-            if (is.null(n) || n == 0) {
+            if (is.null(n) || n < 1) {
                 nc <- as.numeric(terra::global(x[[1]], fun = "notNA"))
-                n <- ceiling(nc / 5)
+                n <- ceiling(nc / 10)
             }
             as.matrix(
                 drop_na(
@@ -77,7 +77,14 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
     out <- terra::predict(
         object = x,
         model = list(),
-        fun = par_fun,
+        fun = function(model, newdata, ...) {
+            return(
+                par_cpp(
+                    rast_vals = as.matrix(newdata),
+                    ...
+                )
+            )
+        },
         ref_vals = pa_vals,
         samp_vals = rand_cells,
         intercept = ifelse(methods::is(mod, "gdm"), mod$intercept, mod),
@@ -88,33 +95,13 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
     return(out)
 }
 
+# # wrapper function for par C++
+# par_fun <- function(model, newdata, ...) {
+#     return(
+#         par_cpp(
+#             rast_vals = as.matrix(newdata),
+#             ...
+#         )
+#     )
+# }
 
-# wrapper function for par C++
-par_fun <- function(model, newdata, ...) {
-    # check for NAs
-    has_na <- anyNA(newdata)
-    nr <- nrow(newdata)
-    if (has_na) {
-        idx <- which(stats::complete.cases(newdata))
-        out <- rep(NaN, nr)
-        # if all NA, return NaN vector
-        if (!length(idx)) return(out)
-        # subset the complete data
-        dat <- as.matrix(newdata[idx, ])
-    } else {
-        dat <- as.matrix(newdata)
-    }
-
-    index <- par_cpp(
-        rast_vals = dat,
-        ...
-    )
-
-    # sort out possible NAs
-    if (has_na) {
-        out[idx] <- index
-        return(out)
-    } else {
-        return(index)
-    }
-}

@@ -13,7 +13,7 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export]]
-Rcpp::NumericVector presist(
+Rcpp::NumericVector presist_cpp(
         const Rcpp::NumericMatrix &rast_vals,
         const Rcpp::NumericMatrix &ref_vals,
         const Rcpp::NumericMatrix &cond_vals,
