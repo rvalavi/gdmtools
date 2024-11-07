@@ -49,7 +49,7 @@ Rcpp::NumericVector presist_cpp(
         // loop through the reference samples
         for (int j = 0; j < nref; j++)
         {
-            auto eco_dist = dist(rast, refs, i, j);
+            auto eco_dist = distance(rast, refs, i, j);
             double sim_ij = similarity(intercept, eco_dist);
             sim_cond += (cond(j, 0) * sim_ij);
             sim_pers += sim_ij;

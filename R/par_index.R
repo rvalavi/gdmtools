@@ -95,13 +95,3 @@ par_index <- function(x, pa, mod, n = NULL, ncores = -1, ...) {
     return(out)
 }
 
-# # wrapper function for par C++
-# par_fun <- function(model, newdata, ...) {
-#     return(
-#         par_cpp(
-#             rast_vals = as.matrix(newdata),
-#             ...
-#         )
-#     )
-# }
-

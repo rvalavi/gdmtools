@@ -2,14 +2,17 @@ Package: gdmtools
 Type: Package
 Title: Tools for Spatial Biodiversity Analysis from GDM Rasters Outputs
 Version: 0.1.0
-Date: 2024-11-02
-Author: Roozbeh Valavi, et al... (will be added)
+Date: 2024-11-04
+Authors@R: c(person("Roozbeh", "Valavi", role = c("aut", "cre"),
+                    email = "valavi.r@gmail.com", comment = c(ORCID = "0000-0003-2495-5277")),
+             person("Karel", "Mokany", role = "aut"),
+             person("Chris", "Ware", role = "aut"))
 Maintainer: Roozbeh Valavi <valavi.r@gmail.com>
-URL: https://github.com/rvalavi/gdmtools
-BugReports: https://github.com/rvalavi/gdmtools/issues
 Description: Providing functions and utilities to generate the advanced spatial 
     biodiversity analysis products from GDM raster outputs (based on Mokany et al.
     2022).
+URL: https://github.com/rvalavi/gdmtools
+BugReports: https://github.com/rvalavi/gdmtools/issues
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

@@ -44,7 +44,7 @@ Rcpp::NumericVector par_cpp(
         double pa_dist = 0.0;
         for (int j = 0; j < nref; j++)
         {
-            auto dist_1 = dist(rast, refs, i, j);
+            auto dist_1 = distance(rast, refs, i, j);
             pa_dist += similarity(intercept, dist_1);
         }
 
@@ -52,7 +52,7 @@ Rcpp::NumericVector par_cpp(
         double reg_dist = 0.0;
         for (int j = 0; j < nsam; j++)
         {
-            auto dist_2 = dist(rast, samples, i, j);
+            auto dist_2 = distance(rast, samples, i, j);
             reg_dist += similarity(intercept, dist_2);
         }
 
